@@ -1,2 +1,2 @@
 # WrongNumber
-Collection of analysis done for Wrong Number
+Collection of analyses for Wrong Number
