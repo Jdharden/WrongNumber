@@ -6,8 +6,6 @@ An analysis of street-tree inventories from cities across the United States, mea
 
 City street-tree inventories (from the [eLife 63-city street-tree database](https://elifesciences.org/)) are joined to USDA PLANTS distribution records so each planted species can be traced to where it grows in the wild across the country. This makes it possible to compare a city's planted canopy against the native flora of its own region.
 
-Headline result so far (San Francisco, Los Angeles, Seattle, Denver, New York): the share of each city's street trees that are native to their own surroundings ranges from about **2% in San Francisco to 26% in New York** — most urban canopy is planted from somewhere else.
-
 ## Data sources
 
 - **City street trees** — cleaned inventories for 63 U.S. cities (`data/all_trees.csv`, ~1.2 GB), from the eLife street-tree database.
