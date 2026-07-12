@@ -20,8 +20,8 @@ All inputs live under `data/`.
 
 | File / folder | What it is | Produced by |
 |---|---|---|
-| `data/archive/*.csv` | 65 raw city street-tree inventories (Dryad) | source data |
-| `data/all_trees.csv` | The 65 inventories stacked into one table | source data |
+| `data/archive/*.csv` | 65 raw city street-tree inventories (Dryad) | [source data](https://datadryad.org/dataset/doi:10.5061/dryad.2jm63xsrf) |
+| `data/all_trees.csv` | The 65 inventories stacked into one table | [source data](https://datadryad.org/dataset/doi:10.5061/dryad.2jm63xsrf) |
 | `data/keys/tree_name_crosswalk.csv` | `common_name` → USDA `join_key` (symbol) | `data_cleaning_script.R` |
 | `data/names_codes.csv` | Fuzzy match of city names to USDA codes | `data_cleaning_script.R` |
 | `data/tree_distrib/` | Per-species USDA county distribution downloads | `distrib_scraper.R` |
