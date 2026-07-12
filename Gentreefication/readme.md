@@ -1,58 +1,115 @@
 # The Trees in Your Neighborhood
 
-An analysis of street-tree inventories from cities across the United States, measured against USDA plant-distribution data to ask a simple question: **how much of a city's canopy actually looks like the landscape around it?**
+Matching city street-tree inventories against the federal USDA PLANTS
+distribution database to answer a single question:
 
-## Overview
+> **Which trees in a city's canopy are actually recorded in the federal (USDA)
+> distribution database for that city's county?**
 
-City street-tree inventories (from the [eLife 63-city street-tree database](https://elifesciences.org/)) are joined to USDA PLANTS distribution records so each planted species can be traced to where it grows in the wild across the country. This makes it possible to compare a city's planted canopy against the native flora of its own region.
+City foresters plant what grows well locally, but the USDA PLANTS database
+records which species are documented as occurring in each U.S. county. Comparing
+the two shows, city by city, how much of the planted canopy is "on the map"
+federally — and which species are growing in a place the federal record doesn't
+list for that county.
 
-## Data sources
+---
 
-- **City street trees** — cleaned inventories for 63 U.S. cities (`data/all_trees.csv`, ~1.2 GB), from the eLife street-tree database.
-- **USDA PLANTS** — species codes (`plantlst.txt`), per-species characteristics, and county-level distribution data scraped from [plants.usda.gov](https://plants.usda.gov).
-- **Geography** — U.S. county boundaries (Census `cb_2020_us_county_500k`) and NOAA CONUS climate divisions, used to map county distributions to regions.
+## Data
 
-## Repository structure
+All inputs live under `data/`.
 
+| File / folder | What it is | Produced by |
+|---|---|---|
+| `data/archive/*.csv` | 65 raw city street-tree inventories (Dryad) | source data |
+| `data/all_trees.csv` | The 65 inventories stacked into one table | source data |
+| `data/keys/tree_name_crosswalk.csv` | `common_name` → USDA `join_key` (symbol) | `data_cleaning_script.R` |
+| `data/names_codes.csv` | Fuzzy match of city names to USDA codes | `data_cleaning_script.R` |
+| `data/tree_distrib/` | Per-species USDA county distribution downloads | `distrib_scraper.R` |
+| `data/tree_distrib.csv` | Those downloads stacked (`symbol`, `county_key`, …) | `df_02.R` |
+| `data/tree_characteristics.csv` | USDA plant characteristics per symbol | `characteristics_pull.R` |
+| `data/county_places.csv` | Place (city) → county (`GEOID_2`) crosswalk | Census |
+| `data/shapefiles/` | County, state and climate-zone geometries | Census / NOAA |
+
+`county_key` and `GEOID_2` are both 5-digit county FIPS codes
+(`STATEFP` + `COUNTYFP`), which is what lets the canopy join to the federal
+distribution.
+
+---
+
+## Pipeline
+
+The repository is organized as a collect → clean → join → analyze flow.
+
+**1. Collect** (run occasionally; hits USDA / the web)
+
+- `data_cleaning_script.R` — stacks the city inventories and fuzzy-matches city
+  tree names to USDA plant codes.
+- `distrib_scraper.R` — Selenium scraper that downloads each species' county
+  distribution from `plants.usda.gov`.
+- `characteristics_pull.R` — pulls plant IDs and characteristics from the USDA
+  API.
+
+**2. Clean · Join · Analyze** (the main deliverable)
+
+- **`scripts/canopy_in_federal_database.R`** — the single, consolidated,
+  reproducible script. It reads the saved intermediate CSVs above and answers
+  the research question end to end. It does **not** scrape or call the API.
+
+Supporting/legacy scripts (`df_01.R`, `df_02.R`, `mapping_distribution.R`,
+`share_of_canopy.R`) contain the original exploratory versions of these steps
+and the choropleth mapping code.
+
+---
+
+## Running the analysis
+
+Open `WN_trees.Rproj` in RStudio (so the working directory is the project root),
+then:
+
+```r
+source("scripts/canopy_in_federal_database.R")
 ```
-WN_trees/
-├── data/
-│   ├── all_trees.csv              # combined 63-city street-tree inventory
-│   ├── tree_distrib.csv           # USDA county-level distribution (long)
-│   ├── distrib_climate.csv        # distribution joined to climate regions
-│   ├── tree_characteristics*.csv  # USDA species traits
-│   ├── names_codes.csv            # scientific/common name <-> USDA symbol
-│   ├── tree_usda_ids.csv          # USDA symbol/rank lookup
-│   ├── tree_distrib/              # raw per-species distribution downloads
-│   └── shapefiles/                # county + climate-division boundaries
-├── scripts/
-│   ├── distrib_scraper.R          # scrape USDA distribution CSVs (RSelenium)
-│   ├── characteristics_pull.R     # pull USDA species characteristics
-│   ├── data_cleaning_script.R     # combine + clean city inventories
-│   ├── df_01.R / df_02.R          # dataset assembly helpers
-│   └── mapping_distribution.R     # join distribution to regions; mapping
-├── regional_analysis/             # analysis outputs (charts, summaries, scripts)
-└── markdown/                      # R Markdown writeups
+
+Requirements: R (≥ 4.1, for the native `|>` pipe), `tidyverse`, and `janitor`.
+
+### What it produces
+
+Two files written to `data/mapping_files/`:
+
+- **`canopy_federal_match.csv`** — one row per city × canopy species, with an
+  `in_usda` flag (`TRUE` = USDA records that species in the city's county).
+- **`canopy_federal_summary.csv`** — one row per city, with both:
+  - `species_share` — % of *distinct canopy species* in the federal county db, and
+  - `trees_share` — % of *individual trees* (canopy-weighted) in the federal county db.
+
+### Drilling into one city
+
+```r
+sf <- canopy_in_federal_db("San Francisco")
+#> San Francisco: 8/113 species (7.1%) and … trees are in the USDA county database.
+
+sf |> filter(!in_usda)   # species growing in SF's canopy but not in USDA's county record
 ```
 
-## Analysis outputs
+Pass any city name present in `unique(canopy$city)`.
 
-The `regional_analysis/` folder contains the current results:
+---
 
-- `local_native_chart.png` + `LOCAL_CANOPY_FINDINGS.md` — how much of each city's canopy is native to its own area (main finding).
-- `fig1_regional_signature.png`, `fig2_exotic_share.png` + `FINDINGS.md` — which region of the country each city's trees most resemble.
-- `local_native.py`, `analyze.py` — reproducible analysis scripts (Python).
-- `*.csv` — the underlying share tables.
+## Notes & caveats
 
-## Reproducing
+- **Two shares, on purpose.** `species_share` treats every species equally;
+  `trees_share` weights by how many trees of each species a city actually has.
+  They answer slightly different versions of "how much of the canopy is in the
+  federal record."
+- **State-only USDA rows are dropped.** Distribution rows without a county FIP
+  can't match a 5-digit county, so only county-level federal records are used.
+- **Unmatched places.** A small number of trees sit in places that don't resolve
+  to a county in `county_places.csv` (mostly tiny suburbs); they carry a missing
+  `GEOID_2` and are treated as not matched. The District of Columbia is coded
+  explicitly to county `11001`.
+- A 0% share for a city means none of its matched canopy species are recorded by
+  USDA for that county — that is a real feature of the data, not a join error.
 
-R scripts (data assembly) use `tidyverse`, `sf`, `janitor`, `fuzzyjoin`, `rvest`, and `RSelenium`. The analysis scripts in `regional_analysis/` run on Python 3 with `matplotlib`:
+---
 
-```bash
-python3 regional_analysis/local_native.py   # native-vs-introduced shares + USDA cross-check
-python3 regional_analysis/local_chart.py     # headline chart
-```
-
-## Author
-
-Harden, D. John
+*Author: D. John Harden*
