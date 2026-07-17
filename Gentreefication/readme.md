@@ -40,7 +40,7 @@ distribution.
 
 The repository is organized as a collect → clean → join → analyze flow.
 
-**1. Collect** (run occasionally; hits USDA / the web)
+**1. Collect**
 
 - `data_cleaning_script.R` — stacks the city inventories and fuzzy-matches city
   tree names to USDA plant codes.
@@ -49,7 +49,7 @@ The repository is organized as a collect → clean → join → analyze flow.
 - `characteristics_pull.R` — pulls plant IDs and characteristics from the USDA
   API.
 
-**2. Clean · Join · Analyze** (the main deliverable)
+**2. Clean · Join · Analyze**
 
 - **`scripts/canopy_in_federal_database.R`** — the single, consolidated,
   reproducible script. It reads the saved intermediate CSVs above and answers
@@ -63,8 +63,7 @@ and the choropleth mapping code.
 
 ## Running the analysis
 
-Open `WN_trees.Rproj` in RStudio (so the working directory is the project root),
-then:
+Open `WN_trees.Rproj` in RStudio
 
 ```r
 source("scripts/canopy_in_federal_database.R")
@@ -111,5 +110,3 @@ Pass any city name present in `unique(canopy$city)`.
   USDA for that county — that is a real feature of the data, not a join error.
 
 ---
-
-*Author: D. John Harden*
