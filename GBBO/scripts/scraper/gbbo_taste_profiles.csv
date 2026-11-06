@@ -1,0 +1,66 @@
+f1,f2,n_pairs,mean_flavour_score,mean_reward,example
+Booze,Caramel & Sugar,1,0.5694,-0.148,Butterscotch + Whisky
+Booze,Chocolate,4,0.447625,-0.037175,Chocolate + Liqueur
+Booze,Citrus,4,0.567725,-0.08925,Orange + Wine
+Booze,Coffee & Tea,1,0.5203,0.0925,Brandy + Coffee
+Booze,Dairy,1,0.6069,-0.003,Cream + Whisky
+Booze,Floral & Herb,1,0.6811,0.0165,Thyme + Whisky
+Booze,Fruit,6,0.4850833333333333,-0.05558333333333334,Raisin + Rum
+Booze,Nuts,1,0.3084,0.0085,Almond + Liqueur
+Caramel & Sugar,Caramel & Sugar,2,0.49965,0.02775,Caramel + Honey
+Caramel & Sugar,Chocolate,4,0.45545,-0.17779999999999999,Caramel + Chocolate
+Caramel & Sugar,Citrus,4,0.515625,-0.025125,Caramel + Orange
+Caramel & Sugar,Coffee & Tea,1,0.4896,0.0125,Caramel + Coffee
+Caramel & Sugar,Dairy,4,0.490075,-0.044,Caramel + Cheese
+Caramel & Sugar,Floral & Herb,5,0.3581,0.1026,Caramel + Rosemary
+Caramel & Sugar,Fruit,11,0.5069454545454546,-0.01745454545454546,Rhubarb + Toffee
+Caramel & Sugar,Nuts,9,0.5074888888888889,-0.0065333333333333354,Caramel + Peanut
+Caramel & Sugar,Savoury & other,2,0.42164999999999997,-0.09025,Caramel + Miso
+Caramel & Sugar,Spice & Vanilla,4,0.42275,-0.0335,Ginger + Honey
+Caramel & Sugar,Vegetable,1,0.4745,-0.033,Caramel + Onion
+Chocolate,Citrus,4,0.48007500000000003,-0.003425000000000002,Chocolate + Yuzu
+Chocolate,Coffee & Tea,2,0.31155,0.0547,Chocolate + Tea
+Chocolate,Dairy,6,0.48033333333333333,-0.0113,Chocolate + Curd
+Chocolate,Floral & Herb,4,0.360425,-0.0014249999999999992,Chocolate + Mint
+Chocolate,Fruit,18,0.4679388888888889,-0.03345555555555556,Chocolate + Rhubarb
+Chocolate,Nuts,10,0.45047,-0.01969,Chocolate + Hazelnut
+Chocolate,Savoury & other,2,0.4676,-0.05495,Chocolate + Gruyere
+Chocolate,Spice & Vanilla,5,0.34372,-0.0394,Chilli + Chocolate
+Chocolate,Vegetable,2,0.34850000000000003,-0.10404999999999999,Chocolate + Tomato
+Citrus,Citrus,2,0.5427500000000001,0.0435,Lemon + Lime
+Citrus,Coffee & Tea,1,0.4827,0.0695,Coffee + Lemon
+Citrus,Dairy,10,0.5679,0.0701,Cheese + Lemon
+Citrus,Floral & Herb,7,0.3774571428571428,0.17707142857142857,Mint + Orange
+Citrus,Fruit,27,0.5249925925925926,0.08555555555555555,Lime + Strawberry
+Citrus,Nuts,7,0.4498857142857143,0.04978571428571429,Hazelnut + Orange
+Citrus,Spice & Vanilla,11,0.3495,0.019318181818181818,Chilli + Orange
+Citrus,Vegetable,3,0.49033333333333334,0.149,Mushroom + Orange
+Coffee & Tea,Dairy,3,0.4208,0.14266666666666666,Coffee + Curd
+Coffee & Tea,Fruit,1,0.5588,-0.01,Apple + Coffee
+Coffee & Tea,Nuts,4,0.46565,0.006625000000000004,Coffee + Hazelnut
+Coffee & Tea,Spice & Vanilla,3,0.38276666666666664,0.06983333333333333,Coffee + Vanilla
+Dairy,Dairy,6,0.6012,0.1315,Cheese + Curd
+Dairy,Floral & Herb,3,0.4179,0.07783333333333334,Cheese + Rose
+Dairy,Fruit,24,0.5053291666666667,0.06133333333333333,Custard + Strawberry
+Dairy,Nuts,8,0.5218875000000001,0.039375,Curd + Hazelnut
+Dairy,Savoury & other,2,0.5696,0.025,Cheese + Ham
+Dairy,Spice & Vanilla,5,0.47812,0.028900000000000002,Curd + Ginger
+Dairy,Vegetable,6,0.5141833333333333,0.018000000000000002,Cheese + Spinach
+Floral & Herb,Floral & Herb,1,0.0895,0.1525,Rose + Rosemary
+Floral & Herb,Fruit,14,0.3798642857142857,0.08539285714285715,Apple + Rose
+Floral & Herb,Nuts,7,0.28895714285714286,0.011499999999999995,Almond + Rose
+Floral & Herb,Spice & Vanilla,3,0.3554333333333333,0.094,Rose + Vanilla
+Fruit,Fruit,32,0.476675,0.03275,Blueberry + Raspberry
+Fruit,Nuts,31,0.495,-0.002564516129032247,Pear + Pecan
+Fruit,Spice & Vanilla,23,0.36563478260869564,0.013978260869565223,Fig + Ginger
+Fruit,Vegetable,4,0.504825,0.093875,Apple + Leek
+Nuts,Nuts,5,0.44492000000000004,-0.028300000000000006,Almond + Walnut
+Nuts,Savoury & other,1,0.4265,-0.255,Stilton + Walnut
+Nuts,Spice & Vanilla,7,0.40172857142857143,0.028999999999999995,Almond + Ginger
+Nuts,Vegetable,4,0.4595,-0.078625,Spinach + Walnut
+Savoury & other,Savoury & other,1,0.4583,0.191,Ham + Olive
+Savoury & other,Spice & Vanilla,2,0.0484,0.04725,Chilli + Parmesan
+Savoury & other,Vegetable,7,0.3188142857142857,0.033285714285714293,Bacon + Onion
+Spice & Vanilla,Spice & Vanilla,2,-0.11035,0.0635,Chilli + Coriander
+Spice & Vanilla,Vegetable,1,0.3799,-0.154,Cinnamon + Tomato
+Vegetable,Vegetable,4,0.416775,0.168375,Leek + Mushroom
