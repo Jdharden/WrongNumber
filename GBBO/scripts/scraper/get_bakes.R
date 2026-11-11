@@ -3,16 +3,6 @@
 #  GBBO baker-attributed bakes scraper  (series 10-16)
 #  Source: Wikipedia per-episode challenge tables
 # ---------------------------------------------------------------------
-#  Series 1-9 already exist in the {bakeoff}/TidyTuesday data. Series
-#  10-16 only live in Wikipedia's per-episode tables (Baker | Signature |
-#  Technical | Showstopper | Result). Wikipedia isn't bot-protected, so
-#  plain rvest works -- no headless Chrome needed.
-#
-#  Output: bakes_s10_16.csv  (series, episode, baker, signature,
-#          technical_rank, showstopper, result_raw, result)
-#  Upload that CSV into Cowork and I'll extend the ingredient / pairing /
-#  trio / winner analysis to cover series 10-16.
-#
 #  install.packages(c("rvest","dplyr","stringr","purrr","readr"))
 #  Run:  Rscript get_bakes.R
 # =====================================================================
