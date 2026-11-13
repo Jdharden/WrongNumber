@@ -11,25 +11,6 @@ d <- read_csv("data/gbbo_pairing_scores_withinchallenge.csv") |>
   filter(used_by_winner == TRUE) |> 
   filter(str_detect(winners, "Nadiya"))
 
-# d <- read_csv("data/gbbo_ingredient_scores_withinchallenge.csv") |> 
-#   filter(n_baker_eps >= 2)
-  # filter(used_by_winner == TRUE)
-
-# sent_mean <- mean(d$judge_sentiment, na.rm = TRUE)     # ~ how warm the room is on average
-# 
-# d <- d |>
-#   mutate(reward    = reward_graded,
-#          sentiment = judge_sentiment - sent_mean,       # >0 = warmer than average, <0 = cooler
-#          verified  = !is.na(luck_attrib)) |>
-#   filter(!is.na(reward))
-
-# sent_mean <- mean(d$judge_score, na.rm = TRUE)          # centre = average liking
-# d <- d |>
-#   mutate(reward    = reward_graded,
-#          sentiment = judge_score - sent_mean,           # >0 = liked more than average, <0 = less
-#          verified  = !is.na(luck_attrib)) |>
-#   filter(!is.na(reward))
-
 sent_mean <- mean(d$bake_sentiment, na.rm = TRUE)   # centre = average bake reception
 
 d <- d |>
@@ -37,10 +18,7 @@ d <- d |>
          sentiment = bake_sentiment - sent_mean,      # >0 = bakes reviewed warmer than average
          trusted   = n_baker_eps >= 6) |>
   filter(!is.na(reward))
-# ...then label from `filter(d, trusted)` so only well-sampled points get named
 
-
-# label the corners (prefer verified = real bake combos)
 v <- filter(d, n_baker_eps >= 3)
 
 lab <- bind_rows(
@@ -62,8 +40,6 @@ quad <- data.frame(
           "Cooler reviews\nweaker results",    # bottom-left
           "Cooler reviews\nstronger results")  # bottom-right# bottom-right: low praise / great bake
 )
-
-
 
 p <- ggplot(d, aes(reward, sentiment, size = n_baker_eps)) +
   geom_hline(yintercept = 0, colour = "grey40") +
