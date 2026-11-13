@@ -19,7 +19,7 @@
 suppressPackageStartupMessages({ library(chromote); library(jsonlite); library(stringr); library(readxl) })
 
 # Run from the project folder so relative file names resolve.
-PROJECT <- path.expand("~/Documents/Claude/Projects/GBBO")
+PROJECT <- path.expand("Projects/GBBO")
 if (dir.exists(PROJECT)) setwd(PROJECT)
 message("Working directory: ", getwd())
 
